@@ -552,6 +552,16 @@ void ListView::copySpecialProperties(Widget *widget)
         _eventCallback = listViewEx->_eventCallback;
     }
 }
+    
+void ListView::setDataSource(cocos2d::ui::ListViewDataSource *dataSource)
+{
+    _dataSource = dataSource;
+}
+
+ListViewDataSource* ListView::getDataSource()const
+{
+    return _dataSource;
+}
 
 }
 NS_CC_END

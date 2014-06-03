@@ -32,6 +32,45 @@ NS_CC_BEGIN
 
 namespace ui{
     
+class ListView;
+    
+/**
+ * Data source that governs list view backend data.
+ */
+class ListViewDataSource
+{
+public:
+    /**
+     * @js NA
+     * @lua NA
+     */
+    virtual ~ListViewDataSource() {}
+    
+    /**
+     * list item size for a given index
+     *
+     * @param idx the index of a list Item to get a size
+     * @return size of a item at given index
+     */
+    virtual Size listItemSizeForIndex(ListView *listView, ssize_t idx) {
+        return Size::ZERO;
+    };
+    /**
+     * a cell instance at a given index
+     *
+     * @param idx index to search for a cell
+     * @return cell found at idx
+     */
+    virtual Widget* listItemAtIndex(ListView *listView, ssize_t idx) = 0;
+    /**
+     * Returns number of cells in a given table view.
+     *
+     * @return number of cells
+     */
+    virtual ssize_t numberOfItemsInListView(ListView *listView) = 0;
+    
+};
+    
 CC_DEPRECATED_ATTRIBUTE typedef enum
 {
     LISTVIEW_ONSELECTEDITEM_START,
@@ -132,6 +171,9 @@ public:
      */
     Widget* getItem(ssize_t index)const;
     
+    void setDataSource(ListViewDataSource *dataSource);
+    ListViewDataSource* getDataSource() const ;
+    
     /**
      * Returns the item container.
      */
@@ -208,6 +250,8 @@ protected:
     Vector<Widget*> _items;
     Gravity _gravity;
     float _itemsMargin;
+    
+    ListViewDataSource *_dataSource;
     
     Ref*       _listViewEventListener;
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
