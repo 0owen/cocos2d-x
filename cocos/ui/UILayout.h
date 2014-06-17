@@ -56,7 +56,12 @@ public:
  *  @js NA
  *  @lua NA
  */
-    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+#ifdef RELATIVE
+#undef RELATIVE
+#endif
+#endif
+
 class Layout : public Widget, public LayoutProtocol
 {
     
@@ -248,7 +253,7 @@ public:
      */
     virtual void addChild(Node* child, int zOrder, int tag) override;
     
-    virtual void visit(Renderer *renderer, const Mat4 &parentTransform, bool parentTransformUpdated) override;
+    virtual void visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags) override;
 
     virtual void removeChild(Node* child, bool cleanup = true) override;
     
@@ -327,8 +332,8 @@ protected:
     virtual void copySpecialProperties(Widget* model) override;
     virtual void copyClonedWidgetChildren(Widget* model) override;
     
-    void stencilClippingVisit(Renderer *renderer, const Mat4& parentTransform, bool parentTransformUpdated);
-    void scissorClippingVisit(Renderer *renderer, const Mat4& parentTransform, bool parentTransformUpdated);
+    void stencilClippingVisit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags);
+    void scissorClippingVisit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags);
     
     void setStencilClippingSize(const Size& size);
     const Rect& getClippingRect();

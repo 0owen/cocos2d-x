@@ -831,6 +831,7 @@ Developers:
         Fixed incompatible pointer conversion in external/chipmunk/src/cpArray.c
         Fixed memory leak in 'Image'
         Fixed loosing precision when using 'recv' in 'Console'
+        Fixed link error with Xcode 6 when building with 32-bit architecture
         
     ololomax
         Fixed a potential crash in SceneReader::createNodeWithSceneFile
@@ -840,6 +841,7 @@ Developers:
         
     sachingarg05
         Re-added orientation change callback in java activity
+        GLProgram should not abort() if shader compilation fails, returning false is better.
         
     dplusic
         Fixed that cc.pGetAngle may return wrong value
@@ -876,6 +878,16 @@ Developers:
         
     kezhuw
         AutoReleasePool manager improvement
+        
+    zhouxiaoxiaoxujian
+        Added TextField::getStringLength()
+        Add shadow, outline, glow filter support for UIText
+        
+    QiuleiWang
+        Fix the bug that calculated height of multi-line string was incorrect on iOS
+        
+    Rumist
+        Fix the bug that the result of Director->convertToUI() is error.
     
 Retired Core Developers:
     WenSheng Yang
