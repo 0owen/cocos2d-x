@@ -141,13 +141,8 @@ base/ccUTF8.cpp \
 base/ccUtils.cpp \
 base/etc1.cpp \
 base/s3tc.cpp \
+base/CCController.cpp \
 base/CCController-android.cpp \
-base/CCControllerAxisInput.cpp \
-base/CCControllerButtonInput.cpp \
-base/CCControllerDirectionPad.cpp \
-base/CCControllerElement.cpp \
-base/CCControllerThumbstick.cpp \
-base/CCGamepad.cpp \
 base/ObjectFactory.cpp \
 renderer/CCBatchCommand.cpp \
 renderer/CCCustomCommand.cpp \
@@ -228,9 +223,9 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dxandroid_static
 
 # define the macro to compile through support/zip_support/ioapi.c
 LOCAL_CFLAGS   :=  -DUSE_FILE32API
-LOCAL_CPPFLAGS := -Wno-deprecated-declarations
+LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 LOCAL_EXPORT_CFLAGS   := -DUSE_FILE32API
-LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations
+LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 
 include $(BUILD_STATIC_LIBRARY)
 

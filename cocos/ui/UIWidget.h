@@ -37,7 +37,7 @@ class EventListenerTouchOneByOne;
 
 namespace ui {
     
-CC_DEPRECATED_ATTRIBUTE typedef enum
+typedef enum
 {
     TOUCH_EVENT_BEGAN,
     TOUCH_EVENT_MOVED,
@@ -45,7 +45,7 @@ CC_DEPRECATED_ATTRIBUTE typedef enum
     TOUCH_EVENT_CANCELED
 }TouchEventType;
     
-CC_DEPRECATED_ATTRIBUTE typedef void (Ref::*SEL_TouchEvent)(Ref*,TouchEventType);
+typedef void (Ref::*SEL_TouchEvent)(Ref*,TouchEventType);
 #define toucheventselector(_SELECTOR) (SEL_TouchEvent)(&_SELECTOR)
 
 
@@ -456,16 +456,18 @@ public:
 
 
     /**
-     * Ignore the widget size
      *
-     * @param ignore, true that widget will ignore it's size, use texture size, false otherwise. Default value is true.
+     * Note: when you set _ignoreSize to true, no matther you call setContentSize or not, 
+     * the widget size is always equal to the return value of the member function getVirtualRendererSize.
+     *
+     * @param ignore, set member variabl _ignoreSize to ignore
      */
     virtual void ignoreContentAdaptWithSize(bool ignore);
 
     /**
-     * Gets the widget if is ignore it's size.
+     * Query whether the widget ignores user deinfed content size or not
      *
-     * @param ignore, true that widget will ignore it's size, use texture size, false otherwise. Default value is true.
+     * @return bool
      */
     bool isIgnoreContentAdaptWithSize() const;
 
@@ -485,14 +487,8 @@ public:
      */
     virtual Node* getVirtualRenderer();
 
-//    /**
-//     * Gets the content size of widget.
-//     *
-//     * Content size is widget's texture size.
-//     */
-//    virtual const Size& getContentSize() const;
+
     virtual const Size& getVirtualRendererSize() const;
-    
     
 
     /**

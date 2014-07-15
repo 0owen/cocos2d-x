@@ -71,13 +71,13 @@ public:
     
 };
     
-CC_DEPRECATED_ATTRIBUTE typedef enum
+typedef enum
 {
     LISTVIEW_ONSELECTEDITEM_START,
     LISTVIEW_ONSELECTEDITEM_END
 }ListViewEventType;
 
-CC_DEPRECATED_ATTRIBUTE typedef void (Ref::*SEL_ListViewEvent)(Ref*,ListViewEventType);
+typedef void (Ref::*SEL_ListViewEvent)(Ref*,ListViewEventType);
 #define listvieweventselector(_SELECTOR) (SEL_ListViewEvent)(&_SELECTOR)
 
 class ListView : public ScrollView
