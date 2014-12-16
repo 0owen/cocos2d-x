@@ -681,3 +681,87 @@ void UIPageViewDynamicAddAndRemoveTest::pageViewEvent(Ref *pSender, PageView::Ev
     }
 }
 
+// UIPageViewVerticalScrollTest
+UIPageViewVerticalScrollTest::UIPageViewVerticalScrollTest()
+: _displayValueLabel(nullptr)
+{
+    
+}
+
+UIPageViewVerticalScrollTest::~UIPageViewVerticalScrollTest()
+{
+}
+
+bool UIPageViewVerticalScrollTest::init()
+{
+    if (UIScene::init())
+    {
+        Size widgetSize = _widget->getContentSize();
+        
+        // Add a label in which the dragpanel events will be displayed
+        _displayValueLabel = Text::create("Click Buttons on the Left", "fonts/Marker Felt.ttf", 32);
+        _displayValueLabel->setAnchorPoint(Vec2(0.5f, -1.0f));
+        _displayValueLabel->setPosition(Vec2(widgetSize.width / 2.0f,
+                                             widgetSize.height / 2.0f +
+                                             _displayValueLabel->getContentSize().height * 1.5));
+        _uiLayer->addChild(_displayValueLabel);
+        
+        // Add the black background
+        Text* alert = Text::create("PageView Vertical Scroll", "fonts/Marker Felt.ttf", 30);
+        alert->setColor(Color3B(159, 168, 176));
+        alert->setPosition(Vec2(widgetSize.width / 2.0f, widgetSize.height / 2.0f - alert->getContentSize().height * 3.075f));
+        _uiLayer->addChild(alert);
+        
+        Layout* root = static_cast<Layout*>(_uiLayer->getChildByTag(81));
+        
+        Layout* background = dynamic_cast<Layout*>(root->getChildByName("background_Panel"));
+        
+        // Create the page view
+        PageView* pageView = PageView::create();
+        pageView->setContentSize(Size(200.0f, 130.0f));
+        pageView->setAnchorPoint(Vec2(0.5,0.5));
+        Size backgroundSize = background->getContentSize();
+        pageView->setPosition(Vec2(widgetSize.width / 2.0f ,widgetSize.height / 2.0f));
+        pageView->setBackGroundColor(Color3B::GREEN);
+        pageView->setBackGroundColorType(Layout::BackGroundColorType::SOLID);
+        pageView->setRotation(90);
+        
+        int pageCount = 4;
+        for (int i = 0; i < pageCount; ++i)
+        {
+            HBox* outerBox = HBox::create();
+            outerBox->setContentSize(Size(240.0f, 130.0f));
+            
+            for (int k = 0; k < 2; ++k)
+            {
+                VBox* innerBox = VBox::create();
+                
+                for (int j = 0; j < 3; j++)
+                {
+                    Button *btn = Button::create("cocosui/animationbuttonnormal.png",
+                                                 "cocosui/animationbuttonpressed.png");
+                    btn->setName(StringUtils::format("button %d", j));
+                    
+                    innerBox->addChild(btn);
+                }
+                
+                LinearLayoutParameter *parameter = LinearLayoutParameter::create();
+                parameter->setMargin(Margin(0,0,100,0));
+                innerBox->setLayoutParameter(parameter);
+                
+                outerBox->addChild(innerBox);
+                
+            }
+            
+            pageView->insertPage(outerBox,i);
+        }
+        
+        _uiLayer->addChild(pageView);
+     
+        
+        
+        
+        return true;
+    }
+    return false;
+}

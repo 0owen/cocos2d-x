@@ -101,6 +101,7 @@ static const char* s_testArray[] =
     "UIPageViewCustomScrollThreshold",
     "UIPageViewTouchPropagationTest",
     "UIPageViewDynamicAddAndRemoveTest",
+    "UIPageViewVerticalScrollTest",
     
     "UIListViewTest_Vertical",
     "UIListViewTest_Horizontal",
@@ -346,6 +347,8 @@ Scene *UISceneManager::currentUIScene()
             return UIPageViewTouchPropagationTest::sceneWithTitle(s_testArray[_currentUISceneId]);
         case kUIPageViewDynamicAddAndRemoveTest:
             return UIPageViewDynamicAddAndRemoveTest::sceneWithTitle(s_testArray[_currentUISceneId]);
+        case kUIPageViewVerticalScrollTest:
+            return UIPageViewVerticalScrollTest::sceneWithTitle(s_testArray[_currentUISceneId]);
         case kUIListViewTest_Vertical:
             return UIListViewTest_Vertical::sceneWithTitle(s_testArray[_currentUISceneId]);
             

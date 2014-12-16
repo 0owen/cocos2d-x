@@ -93,6 +93,8 @@ enum
     kUIPageViewCustomScrollThreshold,
     kUIPageViewTouchPropagationTest,
     kUIPageViewDynamicAddAndRemoveTest,
+    kUIPageViewVerticalScrollTest,
+    
     kUIListViewTest_Vertical,
     kUIListViewTest_Horizontal,
     kUIWidgetAddNodeTest,

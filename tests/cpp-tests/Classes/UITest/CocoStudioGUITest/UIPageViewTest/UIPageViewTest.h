@@ -100,4 +100,17 @@ protected:
     Text* _displayValueLabel;
 };
 
+class UIPageViewVerticalScrollTest : public UIScene
+{
+public:
+    UIPageViewVerticalScrollTest();
+    ~UIPageViewVerticalScrollTest();
+    bool init();
+    
+    
+protected:
+    UI_SCENE_CREATE_FUNC(UIPageViewVerticalScrollTest)
+    Text* _displayValueLabel;
+};
+
 #endif /* defined(__TestCpp__UIPageViewTest__) */
