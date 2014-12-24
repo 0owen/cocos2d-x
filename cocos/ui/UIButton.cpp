@@ -239,6 +239,8 @@ void Button::loadTextureNormal(const std::string& normal,TextureResType texType)
         default:
             break;
     }
+   
+    _buttonNormalRenderer->setState(_buttonNormalRenderer->getState());
     
     _normalTextureSize = _buttonNormalRenderer->getContentSize();
    
@@ -279,7 +281,7 @@ void Button::loadTexturePressed(const std::string& selected,TextureResType texTy
         default:
             break;
     }
-    
+    _buttonClickedRenderer->setState(_buttonClickedRenderer->getState());
     _pressedTextureSize = _buttonClickedRenderer->getContentSize();
   
     this->updateChildrenDisplayedRGBA();
@@ -308,7 +310,7 @@ void Button::loadTextureDisabled(const std::string& disabled,TextureResType texT
         default:
             break;
     }
-
+    _buttonDisableRenderer->setState(_buttonDisableRenderer->getState());
     _disabledTextureSize = _buttonDisableRenderer->getContentSize();
    
     this->updateChildrenDisplayedRGBA();

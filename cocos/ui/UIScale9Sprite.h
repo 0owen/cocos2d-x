@@ -268,6 +268,7 @@ namespace ui {
          *@since v3.4
          */
         void setState(State state);
+        State getState()const;
         
         Size getOriginalSize() const;
         void setPreferredSize(const Size& size);
@@ -443,6 +444,8 @@ namespace ui {
         
         bool _flippedX;
         bool _flippedY;
+        
+        State _state;
     };
     
 }}  //end of namespace

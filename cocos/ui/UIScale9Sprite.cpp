@@ -55,6 +55,7 @@ namespace ui {
     , _insetBottom(0)
     ,_flippedX(false)
     ,_flippedY(false)
+    ,_state(State::NORMAL)
 
     {
         this->setAnchorPoint(Vec2(0.5,0.5));
@@ -806,9 +807,15 @@ y+=ytranslate;         \
         CC_SAFE_DELETE(pReturn);
         return NULL;
     }
+    Scale9Sprite::State Scale9Sprite::getState()const
+    {
+        return _state;
+    }
     
     void Scale9Sprite::setState(cocos2d::ui::Scale9Sprite::State state)
     {
+        _state = state;
+        
         GLProgramState *glState = nullptr;
         switch (state)
         {
