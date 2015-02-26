@@ -101,10 +101,6 @@ set(_OpenalSoft_inc al.h)
 set(_OpenalSoft_inc_paths AL)
 set(_OpenalSoft_libs OpenAL32)
 
-set(_zlib_inc zlib.h)
-set(_zlib_inc_paths zlib)
-set(_zlib_libs libzlib)
-
 set(_fmod_prefix FMODEX)
 set(_fmod_inc fmod.h)
 set(_fmod_inc_paths fmod)
