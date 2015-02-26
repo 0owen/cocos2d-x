@@ -55,6 +55,7 @@ if(MINGW)
   set(USE_PREBUILT_LIBS_DEFAULT OFF)
 endif()
 
+set(BUILD_CPP_EMPTY_TESTS_DEFAULT ON)
 set(BUILD_CPP_TESTS_DEFAULT ON)
 set(BUILD_LUA_LIBS_DEFAULT ON)
 set(BUILD_LUA_TESTS_DEFAULT ON)
@@ -75,6 +76,7 @@ option(BUILD_EDITOR_SPINE "Build editor support for spine" ON)
 option(BUILD_EDITOR_COCOSTUDIO "Build editor support for cocostudio" ON)
 option(BUILD_EDITOR_COCOSBUILDER "Build editor support for cocosbuilder" ON)
 option(BUILD_CPP_TESTS "Build TestCpp samples" ${BUILD_CPP_TESTS_DEFAULT})
+option(BUILD_CPP_EMPTY_TESTS_DEFAULT "Build CppEmptyTest samples" ${BUILD_CPP_EMPTY_TESTS_DEFAULT})
 option(BUILD_LUA_LIBS "Build lua libraries" ${BUILD_LUA_LIBS_DEFAULT})
 option(BUILD_LUA_TESTS "Build TestLua samples" ${BUILD_LUA_TESTS_DEFAULT})
 option(BUILD_JS_LIBS "Build js libraries" OFF)
@@ -169,7 +171,9 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/deprecated
   ${CMAKE_CURRENT_SOURCE_DIR}/cocos/platform
   ${CMAKE_CURRENT_SOURCE_DIR}/extensions
-  ${CMAKE_CURRENT_SOURCE_DIR}/external
+  ${CMAKE_CURRENT_SOURCE_DIR}/external/${PLATFORM_FOLDER}/${ARCH_DIR}/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/external/${PLATFORM_FOLDER}/${ARCH_DIR}/include/luajit
+  ${CMAKE_CURRENT_SOURCE_DIR}/external/${PLATFORM_FOLDER}/${ARCH_DIR}/include/spidermonkey
 )
 
 if(USE_PREBUILT_LIBS)
@@ -279,9 +283,12 @@ add_subdirectory(cocos)
 
 # build cpp tests
 if(BUILD_CPP_TESTS)
-  add_subdirectory(tests/cpp-empty-test)
   add_subdirectory(tests/cpp-tests)
 endif(BUILD_CPP_TESTS)
+
+if(BUILD_CPP_EMPTY_TESTS_DEFAULT)
+  add_subdirectory(tests/cpp-empty-test)
+endif()
 
 ## Scripting
 if(BUILD_LUA_LIBS)

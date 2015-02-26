@@ -153,7 +153,7 @@ if(MSVC)
 endif()
 
 if(LINUX)
-  list(APPEND all_prebuilt_libs fmod)
+  list(APPEND all_prebuilt_libs fmod glfw3)
 endif()
 
 # END CONFIG

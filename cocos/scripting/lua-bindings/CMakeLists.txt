@@ -115,7 +115,7 @@ foreach(pkg LUAJIT LUASOCKET CJSON XXTEA)
   cocos_use_pkg(luacocos2d ${pkg})
 endforeach()
 
-target_link_libraries(luacocos2d cocos2d )
+target_link_libraries(luacocos2d cocos2d dl)
 
 set_target_properties(luacocos2d
     PROPERTIES

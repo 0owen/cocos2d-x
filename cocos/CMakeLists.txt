@@ -31,6 +31,8 @@ if(WINDOWS)
   ADD_DEFINITIONS(-DUNICODE -D_UNICODE)
 endif()
 
+include_directories(${COCOS_EXTERNAL_DIR}/${PLATFORM_FOLDER}/${ARCH_DIR}/include)
+
 include(2d/CMakeLists.txt)
 include(3d/CMakeLists.txt)
 include(platform/CMakeLists.txt)
@@ -126,8 +128,8 @@ foreach(pkg ZLIB MINIZIP JPEG PNG TIFF TINYXML2 FREETYPE WEBSOCKETS CURL FLATBUF
   cocos_use_pkg(cocos2d ${pkg})
 endforeach()
 
-include_directories(${COCOS_EXTERNAL_DIR}/${PLATFORM_FOLDER}/${ARCH_DIR}/include)
-target_link_libraries(cocos2d ${PLATFORM_SPECIFIC_LIBS})
+target_link_libraries(cocos2d ${PLATFORM_SPECIFIC_LIBS} Xrandr Xi Xrender drm
+Xdamage Xxf86vm Xext X11 pthread)
 
 if(USE_WEBP)
   add_definitions(-DCC_USE_WEBP=1)

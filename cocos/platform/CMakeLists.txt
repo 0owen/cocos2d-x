@@ -58,6 +58,7 @@ endif()
 include_directories(
   platform/desktop
   platform
+  platform/../../external/${PLATFORM_FOLDER}/${ARCH_DIR}/include
 )
 
 set(COCOS_PLATFORM_SRC

@@ -40,7 +40,11 @@ include_directories(
 # add the executable
 add_executable(${APP_NAME} ${SAMPLE_SRC})
 
-target_link_libraries(${APP_NAME} luacocos2d cocos2d "-pagezero_size 10000 -image_base 100000000")
+if(MACOSX OR APPLE)
+set(lua_other_linker_flags  "-pagezero_size 10000 -image_base 100000000")
+endif()
+
+target_link_libraries(${APP_NAME} luacocos2d cocos2d ${lua_other_linker_flags})
 
 if(MACOSX OR APPLE)
   set_target_properties(${APP_NAME} PROPERTIES
