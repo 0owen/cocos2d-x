@@ -23,13 +23,6 @@ set(COCOS_PLATFORM_SPECIFIC_SRC
 )
 
 elseif(LINUX)
-
-  include_directories(
-    /usr/include
-    /usr/include/GLFW
-    /usr/local/include/GLFW
-  )
-
 set(COCOS_PLATFORM_SPECIFIC_SRC
   platform/linux/CCStdC-linux.cpp
   platform/linux/CCFileUtils-linux.cpp
