@@ -156,9 +156,9 @@ endif()
 
 # architecture
 if ( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-  set(ARCH_DIR "64-bit")
+  set(ARCH_DIR "x86-64")
 elseif ( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-  set(ARCH_DIR "32-bit")
+  set(ARCH_DIR "i386")
 else()
   message( FATAL_ERROR "Unsupported architecture, CMake will exit" )
 endif()
@@ -229,29 +229,14 @@ endif(USE_CHIPMUNK)
 
 # Box2d (not prebuilded, exists as source)
 if(USE_BOX2D)
-  if(USE_PREBUILT_LIBS)
-    add_subdirectory(external/Box2D)
-    set(Box2D_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/external/box2d/include)
-    set(Box2D_LIBRARIES box2d)
-  else()
-    find_package(Box2D REQUIRED CONFIG)
-    # actually Box2D in next line is not a library, it is target exported from Box2DConfig.cmake
-    set(Box2D_LIBRARIES Box2D)
-  endif()
-  message(STATUS "Box2D include dirs: ${Box2D_INCLUDE_DIRS}")
+  cocos_find_package(BOX2D BOX2D REQUIRED)
   add_definitions(-DCC_ENABLE_BOX2D_INTEGRATION=1)
 else()
   add_definitions(-DCC_ENABLE_BOX2D_INTEGRATION=0)
 endif(USE_BOX2D)
 
 # Tinyxml2 (not prebuilded, exists as source)
-if(USE_PREBUILT_LIBS)
-  add_subdirectory(external/tinyxml2)
-  set(TinyXML2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/external/tinyxml2)
-  set(TinyXML2_LIBRARIES tinyxml2)
-else()
-  cocos_find_package(TinyXML2 TinyXML2 REQUIRED)
-endif()
+cocos_find_package(TinyXML2 TinyXML2 REQUIRED)
 message(STATUS "TinyXML2 include dirs: ${TinyXML2_INCLUDE_DIRS}")
 
 # libjpeg
@@ -263,38 +248,26 @@ cocos_find_package(ZLIB ZLIB REQUIRED)
 # dists have packages from zlib, thats very old for us.
 # moreover our embedded version modified to quick provide
 # functionality needed by cocos.
-if(USE_PREBUILT_LIBS OR NOT MINGW)
-  #TODO: hack! should be in external/unzip/CMakeLists.txt
-  include_directories(${ZLIB_INCLUDE_DIRS})
-  add_subdirectory(external/unzip)
-  set(MINIZIP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/external/unzip ${ZLIB_INCLUDE_DIRS})
-  set(MINIZIP_LIBRARIES unzip ${ZLIB_LIBRARIES})
-  message(STATUS "MINIZIP include dirs: ${MINIZIP_INCLUDE_DIRS}")
-else()
-  cocos_find_package(MINIZIP MINIZIP REQUIRED)
-  # double check that we have needed functions
-  include(CheckLibraryExists)
-  check_library_exists(${MINIZIP_LIBRARIES} "unzGoToFirstFile2" "" MINIZIP_HAS_GOTOFIRSTFILE2)
-  if(NOT MINIZIP_HAS_GOTOFIRSTFILE2)
-    message(FATAL_ERROR "Minizip library on you system very old. Please use recent version from https://github.com/nmoinvaz/minizip or enable USE_PREBUILT_LIBS")
-  endif()
-  add_definitions(-DMINIZIP_FROM_SYSTEM)
-endif()
+cocos_find_package(MINIZIP MINIZIP REQUIRED)
+# double check that we have needed functions
+# include(CheckLibraryExists)
+# check_library_exists(${MINIZIP_LIBRARIES} "_unzGoToFirstFile2" "" MINIZIP_HAS_GOTOFIRSTFILE2)
+# if(NOT MINIZIP_HAS_GOTOFIRSTFILE2)
+#   message(FATAL_ERROR "Minizip library on you system very old. Please use recent version from https://github.com/nmoinvaz/minizip or enable USE_PREBUILT_LIBS")
+# endif()
 
 cocos_find_package(PNG PNG REQUIRED)
 cocos_find_package(TIFF TIFF REQUIRED)
 cocos_find_package(WEBSOCKETS WEBSOCKETS REQUIRED)
 cocos_find_package(CURL CURL REQUIRED)
 
-add_subdirectory(external/flatbuffers)
-set(FLATBUFFERS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/external)
+cocos_find_package(FLATBUFFERS FLATBUFFERS REQUIRED)
 message(STATUS "Flatbuffers include dirs: ${FLATBUFFERS_INCLUDE_DIRS}")
 
-
-# build xxhash
-add_subdirectory(external/xxhash)
-set(XXHASH_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/external/xxhash)
-set(XXHASH_LIBRARIES xxhash)
+cocos_find_package(XXHASH XXHASH REQUIRED)
+cocos_find_package(XXTEA XXTEA REQUIRED)
+cocos_find_package(EDTAA3FUNC EDTAA3FUNC REQUIRED)
+cocos_find_package(CONVERTUTF CONVERTUTF REQUIRED)
 
 # libcocos2d.a
 add_subdirectory(cocos)

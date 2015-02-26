@@ -65,8 +65,6 @@ endif()
 include_directories(
   platform/desktop
   platform
-  ../external/ConvertUTF
-  ../external/edtaa3func
 )
 
 set(COCOS_PLATFORM_SRC
@@ -76,9 +74,6 @@ set(COCOS_PLATFORM_SRC
   platform/CCGLView.cpp
   platform/CCFileUtils.cpp
   platform/CCImage.cpp
-  ../external/edtaa3func/edtaa3func.cpp
-  ../external/ConvertUTF/ConvertUTFWrapper.cpp
-  ../external/ConvertUTF/ConvertUTF.c
   ${COCOS_PLATFORM_SPECIFIC_SRC}
 
 )
