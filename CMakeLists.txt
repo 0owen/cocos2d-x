@@ -236,8 +236,8 @@ else()
 endif(USE_BOX2D)
 
 # Tinyxml2 (not prebuilded, exists as source)
-cocos_find_package(TinyXML2 TinyXML2 REQUIRED)
-message(STATUS "TinyXML2 include dirs: ${TinyXML2_INCLUDE_DIRS}")
+cocos_find_package(TINYXML2 TINYXML2 REQUIRED)
+message(STATUS "TinyXML2 include dirs: ${TINYXML2_INCLUDE_DIRS}")
 
 # libjpeg
 cocos_find_package(JPEG JPEG REQUIRED)
@@ -268,6 +268,11 @@ cocos_find_package(XXHASH XXHASH REQUIRED)
 cocos_find_package(XXTEA XXTEA REQUIRED)
 cocos_find_package(EDTAA3FUNC EDTAA3FUNC REQUIRED)
 cocos_find_package(CONVERTUTF CONVERTUTF REQUIRED)
+
+# for luacocos2d
+cocos_find_package(CJSON CJSON REQUIRED)
+cocos_find_package(LUASOCKET LUASOCKET REQUIRED)
+cocos_find_package(LUAJIT LUAJIT REQUIRED)
 
 # libcocos2d.a
 add_subdirectory(cocos)

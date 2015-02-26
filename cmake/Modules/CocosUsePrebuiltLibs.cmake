@@ -39,7 +39,7 @@ set(_chipmunk_libs chipmunk libchipmunk)
 
 set(_zlib_inc zlib.h)
 set(_zlib_inc_paths zlib)
-set(_zlib_libs libz z)
+set(_zlib_libs z libz)
 
 set(_curl_inc curl/curl.h)
 set(_curl_inc_paths curl)
@@ -110,6 +110,19 @@ set(_fmod_inc fmod.h)
 set(_fmod_inc_paths fmod)
 set(_fmod_libs fmodex fmodex64 fmodexL fmodexL64)
 
+#for lua
+set(_cjson_inc lua_cjson.h)
+set(_cjson_inc_paths cjson)
+set(_cjson_libs cjson libcjson)
+
+set(_luajit_inc lua.h)
+set(_luajit_inc_paths luajit)
+set(_luajit_libs luajit libluajit)
+
+set(_luasocket_inc luasocket.h)
+set(_luasocket_inc_paths luasocket)
+set(_luasocket_libs luasocket libluasocket)
+
 set(all_prebuilt_libs
   chipmunk
   curl
@@ -127,6 +140,10 @@ set(all_prebuilt_libs
   flatbuffers
   convertutf
   edtaa3func
+  cjson
+  luasocket
+  luajit
+  zlib
 )
 
 
@@ -179,9 +196,9 @@ foreach(_lib ${all_prebuilt_libs})
 
   if(include_dirs)
     set(${_prefix}_INCLUDE_DIRS ${include_dirs} CACHE PATH "Path to includes for ${_prefix}" FORCE)
-    message(STATUS "${_lib} include path found")
+    # message(STATUS "${_lib} include path found")
   endif()
-  message(STATUS "${_lib} ${_prefix}_INCLUDE_DIRS: ${${_prefix}_INCLUDE_DIRS}")
+  # message(STATUS "${_lib} ${_prefix}_INCLUDE_DIRS: ${${_prefix}_INCLUDE_DIRS}")
 
   set(lib_dir_candidates
     ${roots}/${ARCH_DIR}/libs
@@ -195,7 +212,7 @@ foreach(_lib ${all_prebuilt_libs})
       # find all libs
       foreach(_lib_name ${_${_lib}_libs})
         unset(_lib_tmp CACHE)
-        message(STATUS "Found ${_lib_name} ${_dir}")
+        # message(STATUS "Found ${_lib_name} ${_dir}")
         find_library(_lib_tmp ${_lib_name} PATH ${_dir} NO_DEFAULT_PATH)
         if(_lib_tmp)
           list(APPEND libs ${_lib_tmp})
@@ -205,12 +222,12 @@ foreach(_lib ${all_prebuilt_libs})
   endforeach()
   if(libs)
     set(${_prefix}_LIBRARIES ${libs} CACHE STRING "Libraries to link for ${_prefix}" FORCE)
-    message(STATUS "${_lib} library path found")
+    # message(STATUS "${_lib} library path found")
   endif()
-  message(STATUS "${_lib} ${_prefix}_LIBRARIES: ${${_prefix}_LIBRARIES}")
+  # message(STATUS "${_lib} ${_prefix}_LIBRARIES: ${${_prefix}_LIBRARIES}")
 
   if(${_prefix}_LIBRARIES AND ${_prefix}_INCLUDE_DIRS)
-    message(STATUS "${_prefix} found")
+    # message(STATUS "${_prefix} found")
     set(${_prefix}_FOUND YES)
   endif()
       

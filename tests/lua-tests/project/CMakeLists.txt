@@ -1,4 +1,5 @@
 set(APP_NAME lua-tests)
+set(cocos_root ${Cocos2d-X_SOURCE_DIR})
 
 set(SAMPLE_SRC
     Classes/AppDelegate.cpp
@@ -32,7 +33,8 @@ include_directories(
   ../../../cocos/scripting/lua-bindings/manual
   ../../../cocos/scripting/lua-bindings/manual/tolua
   ../../../cocos/scripting/lua-bindings/auto
-  ../../../external/lua/lua
+  ${cocos_root}/external/${PLATFORM_FOLDER}/${ARCH_DIR}/include
+  ${cocos_root}/external/${PLATFORM_FOLDER}/${ARCH_DIR}/include/luajit
 )
 
 # add the executable

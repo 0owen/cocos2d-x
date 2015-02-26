@@ -25,7 +25,8 @@ include_directories(
   Classes
   ../../../cocos/scripting/lua-bindings/manual
   ../../../cocos/scripting/lua-bindings/manual/tolua
-  ../../../external/lua/lua
+  ${cocos_root}/external/${PLATFORM_FOLDER}/${ARCH_DIR}/include
+  ${cocos_root}/external/${PLATFORM_FOLDER}/${ARCH_DIR}/include/luajit
 )
 
 # add the executable
