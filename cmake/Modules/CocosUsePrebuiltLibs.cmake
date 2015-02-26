@@ -72,7 +72,7 @@ set(_websockets_libs websockets libwebsockets)
 
 set(_glfw3_inc glfw3.h)
 set(_glfw3_inc_paths glfw)
-set(_glfw3_libs libglfw)
+set(_glfw3_libs glfw libglfw)
 
 set(_sqlite3_inc sqlite3.h)
 set(_sqlite3_inc_paths sqlite3)
